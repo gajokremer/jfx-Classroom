@@ -16,97 +16,97 @@
    <children>
       <Pane prefHeight="457.0" prefWidth="485.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="177.0" layoutY="55.0" text="Create your account">
+            <Label layoutX="177.0" layoutY="48.0" text="Create your account" textFill="#0000df">
                <font>
                   <Font name="Times New Roman Bold" size="28.0" />
                </font>
             </Label>
-            <Label layoutX="37.0" layoutY="121.0" text="Username: ">
+            <Label layoutX="37.0" layoutY="114.0" text="Username: " textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUsername" layoutX="127.0" layoutY="118.0" />
-            <Label layoutX="40.0" layoutY="165.0" text="Password:">
+            <TextField fx:id="txtUsername" layoutX="127.0" layoutY="111.0" />
+            <Label layoutX="40.0" layoutY="158.0" text="Password:" textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtPassword" layoutX="127.0" layoutY="162.0" />
-            <Button layoutX="207.0" layoutY="314.0" mnemonicParsing="false" onAction="#signIn" text="Sign in">
+            <PasswordField fx:id="txtPassword" layoutX="127.0" layoutY="155.0" />
+            <Button layoutX="207.0" layoutY="307.0" mnemonicParsing="false" onAction="#signIn" style="-fx-background-color: blue;" text="Sign in" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="302.0" layoutY="314.0" mnemonicParsing="false" onAction="#createAccount" text="Create account">
+            <Button layoutX="302.0" layoutY="307.0" mnemonicParsing="false" onAction="#createAccount" style="-fx-background-color: blue;" text="Create account" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label layoutX="244.0" layoutY="35.0" text="Join Classroom">
+            <Label layoutX="244.0" layoutY="28.0" text="Join Classroom" textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="206.0" text="Profile photo:">
+            <Label layoutX="17.0" layoutY="199.0" text="Profile photo:" textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="311.0" layoutY="121.0" text="Gender: ">
+            <Label layoutX="311.0" layoutY="114.0" text="Gender: " textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="316.0" layoutY="152.0" text="Career:">
+            <Label layoutX="316.0" layoutY="145.0" text="Career:" textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <CheckBox layoutX="384.0" layoutY="153.0" mnemonicParsing="false" text="Software Engineer">
+            <CheckBox layoutX="384.0" layoutY="146.0" mnemonicParsing="false" text="Software Engineer">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="383.0" layoutY="179.0" mnemonicParsing="false" text="Telematic Engineer">
+            <CheckBox layoutX="383.0" layoutY="172.0" mnemonicParsing="false" text="Telematic Engineer">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="384.0" layoutY="206.0" mnemonicParsing="false" text="Industrial Engineer">
+            <CheckBox layoutX="384.0" layoutY="199.0" mnemonicParsing="false" text="Industrial Engineer">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </CheckBox>
-            <Label layoutX="21.0" layoutY="247.0" text="Birthday:">
+            <Label layoutX="21.0" layoutY="240.0" text="Birthday:" textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="birthDate" layoutX="100.0" layoutY="244.0" />
-            <ChoiceBox fx:id="favoriteBrowser" layoutX="430.0" layoutY="244.0" prefWidth="150.0" />
-            <Label layoutX="292.0" layoutY="247.0" text="Favorite Browser:">
+            <DatePicker fx:id="birthDate" layoutX="100.0" layoutY="237.0" />
+            <ChoiceBox fx:id="favoriteBrowser" layoutX="430.0" layoutY="237.0" prefWidth="150.0" />
+            <Label layoutX="292.0" layoutY="240.0" text="Favorite Browser:" textFill="#0000df">
                <font>
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="profilePic" layoutX="127.0" layoutY="203.0" />
-            <RadioButton layoutX="382.0" layoutY="122.0" mnemonicParsing="false" text="Male">
+            <TextField fx:id="profilePic" layoutX="127.0" layoutY="196.0" prefHeight="26.0" prefWidth="112.0" />
+            <RadioButton layoutX="382.0" layoutY="115.0" mnemonicParsing="false" text="Male">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="448.0" layoutY="122.0" mnemonicParsing="false" text="Female">
+            <RadioButton layoutX="448.0" layoutY="115.0" mnemonicParsing="false" text="Female">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="526.0" layoutY="122.0" mnemonicParsing="false" text="Other">
+            <RadioButton layoutX="526.0" layoutY="115.0" mnemonicParsing="false" text="Other">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </RadioButton>
-            <Button layoutX="294.0" layoutY="203.0" mnemonicParsing="false" onAction="#uploadPic" text="Upload" />
+            <Button layoutX="253.0" layoutY="195.0" mnemonicParsing="false" onAction="#uploadPic" style="-fx-background-color: blue;" text="Upload" textFill="WHITE" />
          </children>
       </Pane>
    </children>
