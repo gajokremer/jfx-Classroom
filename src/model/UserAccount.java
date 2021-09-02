@@ -1,8 +1,5 @@
 package model;
 
-import java.io.File;
-import java.util.Date;
-
 public class UserAccount {
 	
 	private String username;

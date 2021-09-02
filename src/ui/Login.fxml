@@ -9,12 +9,12 @@
 
 <Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="167.0" layoutY="52.0" text="Sign in to Classroom" textFill="#0000df">
+      <Label layoutX="167.0" layoutY="52.0" text="Sign in to Classroom">
          <font>
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="117.0" layoutY="138.0" text="Username: " textFill="#0000fd">
+      <Label layoutX="117.0" layoutY="138.0" text="Username: ">
          <font>
             <Font name="Times New Roman" size="24.0" />
          </font>
@@ -23,7 +23,7 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Label layoutX="128.0" layoutY="206.0" text="Password:" textFill="#0000fd">
+      <Label layoutX="128.0" layoutY="206.0" text="Password:">
          <font>
             <Font name="Times New Roman" size="24.0" />
          </font>
