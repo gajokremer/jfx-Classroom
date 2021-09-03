@@ -29,7 +29,7 @@ public class ClassroomManager {
 //		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yy");
 //		String birthday = DATE_FORMAT.format("2/9/2002");
 		
-		UserAccount baseAccount = new UserAccount("gajokremer", "123456", "url", "2/8/2002", "Male", "Software Engineering", "Safari");
+		UserAccount baseAccount = new UserAccount("Admin", "123456", "url", "2/8/2002", "Male", "Software Engineering", "Safari");
 		
 		return baseAccount;
 	}
@@ -40,12 +40,25 @@ public class ClassroomManager {
 		
 		for(int i = 0; i < students.size(); i++) {
 			
-			if(students.get(i).getUsername().equals(username) && students.get(i).getPassword().equals(password)) {
+			if(students.get(i).getUsername().equalsIgnoreCase(username) && 
+					students.get(i).getPassword().equals(password)) {
 				
 				exists = true;
 			}
 		}
 		
 		return exists;
+	}
+	
+	public boolean addAccount(UserAccount account) {
+		
+		if(students.add(account)) {
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		}
 	}
 }

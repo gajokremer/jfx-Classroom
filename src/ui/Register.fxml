@@ -2,13 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -64,17 +64,17 @@
                   <Font name="Times New Roman" size="18.0" />
                </font>
             </Label>
-            <CheckBox layoutX="384.0" layoutY="146.0" mnemonicParsing="false" text="Software Engineer">
+            <CheckBox fx:id="careerS" layoutX="384.0" layoutY="146.0" mnemonicParsing="false" text="Software Engineer">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="383.0" layoutY="172.0" mnemonicParsing="false" text="Telematic Engineer">
+            <CheckBox fx:id="careerT" layoutX="383.0" layoutY="172.0" mnemonicParsing="false" text="Telematic Engineer">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </CheckBox>
-            <CheckBox layoutX="384.0" layoutY="199.0" mnemonicParsing="false" text="Industrial Engineer">
+            <CheckBox fx:id="careerI" layoutX="384.0" layoutY="199.0" mnemonicParsing="false" text="Industrial Engineer">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font>
@@ -110,7 +110,7 @@
                </font>
             </RadioButton>
             <Button layoutX="253.0" layoutY="195.0" mnemonicParsing="false" onAction="#uploadPic" style="-fx-background-color: blue;" text="Upload" textFill="WHITE" />
-            <ComboBox fx:id="favoriteBrowser" layoutX="433.0" layoutY="237.0" prefWidth="150.0" />
+            <HBox fx:id="favoriteBrowser" layoutX="436.0" layoutY="235.0" prefHeight="31.0" prefWidth="150.0" />
          </children>
       </Pane>
    </children>
