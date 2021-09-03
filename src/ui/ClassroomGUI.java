@@ -3,7 +3,6 @@ package ui;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,12 +12,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
@@ -45,14 +47,6 @@ public class ClassroomGUI {
     @FXML
     private HBox favoriteBrowser;
     
-    
-    private String[] browsers = {"Chrome", "Safari", "Firefox", "Edge", "Opera"};
-    
-    private ObservableList<String> browsersList = FXCollections.observableArrayList(browsers);
-    
-    private ChoiceBox<String> cb = new ChoiceBox<String>(browsersList);
-    
-    
     @FXML
     private DatePicker birthDate;
     
@@ -77,6 +71,44 @@ public class ClassroomGUI {
     @FXML
     private CheckBox careerI;
     
+    @FXML
+    private Label currentUser;
+    
+    @FXML
+    private TableView<UserAccount> tvStudentList;
+    
+    @FXML
+    private TableColumn<UserAccount, String> tcUsername;
+    
+    @FXML
+    private TableColumn<UserAccount, String> tcGender;
+    
+    @FXML
+    private TableColumn<UserAccount, String> tcCareer;
+    
+    @FXML
+    private TableColumn<UserAccount, String> tcBirthday;
+    
+    @FXML
+    private TableColumn<UserAccount, String> tcBrowser;
+    
+    private String usernameToDisplay = "";
+    
+    public String getUsernameToDisplay() {
+		return usernameToDisplay;
+	}
+
+
+	public void setUsernameToDisplay(String usernameToDisplay) {
+		this.usernameToDisplay = usernameToDisplay;
+	}
+
+	private ObservableList<UserAccount> observableList;
+    
+    private String[] browsers = {"Chrome", "Safari", "Firefox", "Edge", "Opera"};
+    private ObservableList<String> browsersList = FXCollections.observableArrayList(browsers);
+    
+    private ChoiceBox<String> cb = new ChoiceBox<String>(browsersList);
     
     private ClassroomManager classroomManager;
     
@@ -97,6 +129,18 @@ public class ClassroomGUI {
 		classroomManager = new ClassroomManager();
     }
     
+	private void initializeTableView() {
+
+    	observableList = FXCollections.observableArrayList(classroomManager.getStudents());
+
+    	tvStudentList.setItems(observableList);
+    	tcUsername.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("username"));
+    	tcGender.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("gender"));
+    	tcCareer.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("career"));
+    	tcBirthday.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("birthday"));
+    	tcBrowser.setCellValueFactory(new PropertyValueFactory<UserAccount, String>("favoriteBrowser"));
+    }
+	
     @FXML
     void startClassroom() throws IOException {
 
@@ -109,12 +153,18 @@ public class ClassroomGUI {
     @FXML
     void logIn(ActionEvent event) throws IOException {
     	
+    	setUsernameToDisplay(txtUsername.getText());
+    	
     	if(classroomManager.accountExists(txtUsername.getText(), txtPassword.getText()) == true) {
     		
     		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Account-list.fxml"));
     		fxmlloader.setController(this);
     		Parent accountList = fxmlloader.load();
     		mainPane.getChildren().setAll(accountList);
+    		
+    		currentUser.setText("Current user: " + getUsernameToDisplay());
+    		
+    		initializeTableView();
     	}
     }
 
@@ -130,7 +180,7 @@ public class ClassroomGUI {
     }
     
     @FXML
-    void createAccount(ActionEvent event) {
+    void createAccount(ActionEvent event) throws IOException {
 
     	String username = txtUsername.getText();
     	System.out.println("Username: " + username);
@@ -146,14 +196,29 @@ public class ClassroomGUI {
     	String career =	getCareer();
     	String favoriteBrowser = getFavoriteBrowser();
     	
-    	UserAccount account = new UserAccount(username, password, url, gender, birthday, career, favoriteBrowser);
-    	
-    	if(classroomManager.addAccount(account) == true) {
+    	if(username != null && password != null && url != null && gender != null && 
+    			birthday != null && career != null && favoriteBrowser != null) {
     		
-    		String message = "Account created successfully";
+    		UserAccount account = new UserAccount(username, password, url, birthday, gender, career, favoriteBrowser);
     		
-    		showSuccessDialogue(message);
+    		if(classroomManager.addAccount(account) == true) {
+
+    			String message = "Account created successfully";
+
+    			showSuccessDialogue(message);
+    		}
+    		
+    	} else {
+    		
+    		String message = "All parameters are mandatory";
+    		
+    		showWarningDialogue(message);
     	}
+    	
+    	FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Login.fxml"));
+    	fxmlloader.setController(this);
+    	Parent logIn = fxmlloader.load();
+    	mainPane.getChildren().setAll(logIn);
     }
 
     @FXML
@@ -179,6 +244,15 @@ public class ClassroomGUI {
     	}
     }
     
+    @FXML
+    void logOut(ActionEvent event) throws IOException {
+
+    	FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Login.fxml"));
+    	fxmlloader.setController(this);
+    	Parent logIn = fxmlloader.load();
+    	mainPane.getChildren().setAll(logIn);
+    }
+    
     public String getGenderValue() {
     	
     	String gender = "";
@@ -198,7 +272,14 @@ public class ClassroomGUI {
     	
     	System.out.println("Gender: " + gender);
     	
-    	return gender;
+    	if(itemIsFilled(gender)) {
+    		
+    		return gender;
+    		
+    	} else {
+    		
+    		return null;
+    	}
     }
     
     public String getBirthdayValue() {
@@ -211,9 +292,11 @@ public class ClassroomGUI {
     		System.out.println("Birth date: " + aDate.toString());
     		
     		return aDate.toString();
+    		
+    	} else {
+    		
+    		return null;
     	}
-    	
-		return null;
     }
 
     public String getFavoriteBrowser() {
@@ -222,7 +305,14 @@ public class ClassroomGUI {
     	
     	System.out.println("Favorite browser: " + browser);
     	
-    	return browser;
+    	if(itemIsFilled(browser) == true) {
+    		
+    		return browser;
+    		
+    	} else {
+    		
+    		return null;
+    	}
     }
     
     public void createChoiceBox() {
@@ -266,11 +356,32 @@ public class ClassroomGUI {
     	return career;
     }
     
+    public boolean itemIsFilled(String item) {
+    	
+    	if(item != null) {
+    		
+    		return true;	
+    		
+    	} else {
+    		
+    		return false;
+    	}
+    }
+    
     public void showSuccessDialogue(String message) {
     	
     	Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Contact Manager");
-		alert.setHeaderText("Admin");
+		alert.setHeaderText("Successful");
+		alert.setContentText(message);
+		alert.showAndWait();
+    }
+    
+    public void showWarningDialogue(String message) {
+    	
+    	Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Contact Manager");
+		alert.setHeaderText("Warning");
 		alert.setContentText(message);
 		alert.showAndWait();
     }
