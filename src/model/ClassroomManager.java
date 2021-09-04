@@ -1,9 +1,18 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassroomManager {
+	
+	private String FILE_SAVE_PATH = "data/students.bin";
 	
 	private List<UserAccount> students;
 	
@@ -54,5 +63,44 @@ public class ClassroomManager {
 			
 			return false;
 		}
+	}
+	
+	public boolean saveData() throws FileNotFoundException, IOException {
+		
+//		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_SAVE_PATH));
+//		oos.writeObject(students);
+//		oos.close();
+		
+		File f = new File(FILE_SAVE_PATH);
+		
+		boolean wasSaved = false;
+		
+		if(f.exists()) {
+			
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_SAVE_PATH));
+			oos.writeObject(students);
+			oos.close();
+			wasSaved = true;
+		}
+		
+		return wasSaved;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean loadData() throws FileNotFoundException, IOException, ClassNotFoundException {
+		
+		File f = new File(FILE_SAVE_PATH);
+		
+		boolean isLoaded = false;
+		
+		if(f.exists()) {
+			
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+			students = (List<UserAccount>) ois.readObject();
+			ois.close();
+			isLoaded = true;
+		}
+		
+		return isLoaded;
 	}
 }

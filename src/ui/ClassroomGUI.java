@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -257,6 +258,35 @@ public class ClassroomGUI {
     	fxmlloader.setController(this);
     	Parent logIn = fxmlloader.load();
     	mainPane.getChildren().setAll(logIn);
+    }
+    
+    @FXML
+    void saveData(ActionEvent event) throws FileNotFoundException, IOException {
+    	
+    	if(classroomManager.saveData()) {
+    		
+    		String message = "Data saved successfully";
+    		showSuccessDialogue(message);
+    	}
+    }
+    
+    @FXML
+    void loadData(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, IOException {
+
+    	if(classroomManager.loadData()) {
+
+    		String message = "Data loaded successfully";
+    		showSuccessDialogue(message);
+
+    		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Account-list.fxml"));
+    		fxmlloader.setController(this);
+    		Parent accountList = fxmlloader.load();
+    		mainPane.getChildren().setAll(accountList);
+    		
+    		currentUser.setText("Current user: " + getUsernameToDisplay());
+    		
+    		initializeTableView();
+    	}
     }
     
     public String getGenderValue() {
