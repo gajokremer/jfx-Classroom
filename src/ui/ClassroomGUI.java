@@ -103,11 +103,11 @@ public class ClassroomGUI {
 		this.usernameToDisplay = usernameToDisplay;
 	}
 
+	
 	private ObservableList<UserAccount> observableList;
     
     private String[] browsers = {"Chrome", "Safari", "Firefox", "Edge", "Opera"};
     private ObservableList<String> browsersList = FXCollections.observableArrayList(browsers);
-    
     private ChoiceBox<String> cb = new ChoiceBox<String>(browsersList);
     
     private ClassroomManager classroomManager;
@@ -165,6 +165,12 @@ public class ClassroomGUI {
     		currentUser.setText("Current user: " + getUsernameToDisplay());
     		
     		initializeTableView();
+    		
+    	} else {
+    		
+    		String message = "Username or password is incorrect";
+    		
+    		showWarningDialogue(message);
     	}
     }
 
@@ -327,7 +333,6 @@ public class ClassroomGUI {
     	if(careerS.isSelected()) {
     		
     		career += "Software Engineer";
-    		
     	}
     	
     	if(careerT.isSelected()) {
@@ -338,7 +343,6 @@ public class ClassroomGUI {
     		}
     		
     		career += "Telematic Engineer";
-    		
     	} 
     	
     	if(careerI.isSelected()) {
