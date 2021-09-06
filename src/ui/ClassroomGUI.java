@@ -99,7 +99,6 @@ public class ClassroomGUI {
 		return usernameToDisplay;
 	}
 
-
 	public void setUsernameToDisplay(String usernameToDisplay) {
 		this.usernameToDisplay = usernameToDisplay;
 	}
@@ -169,9 +168,12 @@ public class ClassroomGUI {
     		
     	} else {
     		
+    		String header = "Log in error";
     		String message = "Username or password is incorrect";
     		
-    		showWarningDialogue(message);
+    		showWarningDialogue(header, message);
+    		txtUsername.setText(null);
+    		txtPassword.setText(null);
     	}
     }
 
@@ -210,16 +212,18 @@ public class ClassroomGUI {
     		
     		if(classroomManager.addAccount(account) == true) {
 
+    			String header = "Sign up successful";
     			String message = "Account created successfully";
 
-    			showSuccessDialogue(message);
+    			showSuccessDialogue(header, message);
     		}
     		
     	} else {
     		
+			String header = "Sign up error";
     		String message = "All parameters are mandatory";
     		
-    		showWarningDialogue(message);
+    		showWarningDialogue(header, message);
     	}
     	
     	FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Login.fxml"));
@@ -265,8 +269,9 @@ public class ClassroomGUI {
     	
     	if(classroomManager.saveData()) {
     		
+    		String header = "Data processing";
     		String message = "Data saved successfully";
-    		showSuccessDialogue(message);
+    		showSuccessDialogue(header, message);
     	}
     }
     
@@ -275,8 +280,9 @@ public class ClassroomGUI {
 
     	if(classroomManager.loadData()) {
 
+    		String header = "Data processing";
     		String message = "Data loaded successfully";
-    		showSuccessDialogue(message);
+    		showSuccessDialogue(header, message);
 
     		FXMLLoader fxmlloader = new FXMLLoader(getClass().getResource("Account-list.fxml"));
     		fxmlloader.setController(this);
@@ -402,20 +408,20 @@ public class ClassroomGUI {
     	}
     }
     
-    public void showSuccessDialogue(String message) {
+    public void showSuccessDialogue(String header, String message) {
     	
     	Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Contact Manager");
-		alert.setHeaderText("Successful");
+		alert.setHeaderText(header);
 		alert.setContentText(message);
 		alert.showAndWait();
     }
     
-    public void showWarningDialogue(String message) {
+    public void showWarningDialogue(String header, String message) {
     	
     	Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Contact Manager");
-		alert.setHeaderText("Warning");
+		alert.setHeaderText(header);
 		alert.setContentText(message);
 		alert.showAndWait();
     }
